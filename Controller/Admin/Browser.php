@@ -15,5 +15,12 @@ use Cms\Controller\Admin\AbstractController;
 
 final class Browser extends AbstractController
 {
-    
+    /**
+     * Displays a grid
+     * 
+     * @return string
+     */
+    public function indexAction()
+    {
+    }
 }

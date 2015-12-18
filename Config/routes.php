@@ -10,5 +10,7 @@
  */
 
 return array(
-    
+    '/admin/module/testimonials' => array(
+        'controller' => 'Admin:Browser@indexAction'
+    )
 );
