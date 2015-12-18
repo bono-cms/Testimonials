@@ -12,5 +12,13 @@
 return array(
     '/admin/module/testimonials' => array(
         'controller' => 'Admin:Browser@indexAction'
+    ),
+    
+    '/admin/module/testimonials/add' => array(
+        'controller' => 'Admin:Add@indexAction'
+    ),
+    
+    '/admin/module/testimonials/add.ajax' => array(
+        'controller' => 'Admin:Add@addAction'
     )
 );

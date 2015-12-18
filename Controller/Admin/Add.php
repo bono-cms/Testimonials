@@ -13,5 +13,21 @@ namespace Testimonials\Controller\Admin;
 
 final class Add extends AbstractTestimonial
 {
-    
+    /**
+     * Displays adding form
+     * 
+     * @return string
+     */
+    public function indexAction()
+    {
+    }
+
+    /**
+     * Adds a testimonial
+     * 
+     * @return string
+     */
+    public function addAction()
+    {
+    }
 }
