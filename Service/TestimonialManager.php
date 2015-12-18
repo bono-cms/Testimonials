@@ -12,7 +12,25 @@
 namespace Testimonials\Service;
 
 use Cms\Service\AbstractManager;
+use Testimonials\Storage\TestimonialMapperInterface;
 
 final class TestimonialManager extends AbstractManager implements TestimonialManagerInterface
 {
+    /**
+     * Any compliant testimonial mapper
+     * 
+     * @var \Testimonials\Storage\TestimonialMapperInterface
+     */
+    private $testimonialMapper;
+
+    /**
+     * State initialization
+     * 
+     * @param \Testimonials\Storage\TestimonialMapperInterface $testimonialMapper
+     * @return void
+     */
+    public function __construct(TestimonialMapperInterface $testimonialMapper)
+    {
+        $this->testimonialMapper = $testimonialMapper;
+    }
 }
