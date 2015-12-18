@@ -28,5 +28,9 @@ return array(
     
     '/admin/module/testimonials/edit.ajax' => array(
         'controller' => 'Admin:Edit@updateAction'
+    ),
+    
+    '/admin/module/testimonials/delete.ajax' => array(
+        'controller' => 'Admin:Browser@deleteAction'
     )
 );

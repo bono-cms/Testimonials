@@ -23,4 +23,13 @@ final class Browser extends AbstractController
     public function indexAction()
     {
     }
+
+    /**
+     * Removes a testimonials by its associated id
+     * 
+     * @return string
+     */
+    public function deleteAction()
+    {
+    }
 }
