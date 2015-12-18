@@ -12,6 +12,7 @@
 namespace Testimonials;
 
 use Cms\AbstractCmsModule;
+use Testimonials\Service\TestimonialManager;
 
 final class Module extends AbstractCmsModule
 {
@@ -20,7 +21,11 @@ final class Module extends AbstractCmsModule
      */
     public function getServiceProviders()
     {
+        $testimonialMapper = $this->getMapper('/Testimonials/Storage/MySQL/TestimonialMapper');
+        $testimonialManager = new TestimonialManager($testimonialMapper);
+
         return array(
+            'testimonialManager' => $testimonialManager
         );
     }
 }
