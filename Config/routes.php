@@ -20,5 +20,13 @@ return array(
     
     '/admin/module/testimonials/add.ajax' => array(
         'controller' => 'Admin:Add@addAction'
+    ),
+    
+    '/admin/module/testimonials/edit/(:var)' => array(
+        'controller' => 'Admin:Edit@indexAction'
+    ),
+    
+    '/admin/module/testimonials/edit.ajax' => array(
+        'controller' => 'Admin:Edit@updateAction'
     )
 );

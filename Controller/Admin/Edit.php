@@ -13,5 +13,22 @@ namespace Testimonials\Controller\Admin;
 
 final class Edit extends AbstractTestimonial
 {
-    
+    /**
+     * Displays edit form
+     * 
+     * @param string $id
+     * @return string
+     */
+    public function indexAction($id)
+    {
+    }
+
+    /**
+     * Updates a testimonials
+     * 
+     * @return string
+     */
+    public function updateAction()
+    {
+    }
 }
