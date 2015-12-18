@@ -11,7 +11,9 @@
 
 namespace Testimonials\Controller\Admin;
 
-final class Browser
+use Cms\Controller\Admin\AbstractController;
+
+final class Browser extends AbstractController
 {
     
 }
