@@ -16,4 +16,11 @@ use Cms\Storage\MySQL\AbstractMapper;
 
 final class TestimonialMapper extends AbstractMapper implements TestimonialMapperInterface
 {
+    /**
+     * {@inheritDoc}
+     */
+    public static function getTableName()
+    {
+        return 'bono_module_testimonials';
+    }
 }
