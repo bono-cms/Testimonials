@@ -13,4 +13,11 @@ namespace Testimonials\Storage;
 
 interface TestimonialMapperInterface
 {
+    /**
+     * Fetches all testimonials
+     * 
+     * @param boolnean $published Whether to fetch only published ones
+     * @return array
+     */
+    public function fetchAll($published);
 }

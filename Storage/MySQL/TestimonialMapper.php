@@ -23,4 +23,23 @@ final class TestimonialMapper extends AbstractMapper implements TestimonialMappe
     {
         return 'bono_module_testimonials';
     }
+
+    /**
+     * Fetches all testimonials
+     * 
+     * @param boolnean $published Whether to fetch only published ones
+     * @return array
+     */
+    public function fetchAll($published)
+    {
+        $db = $this->db->select('*')
+                       ->from(self::getTableName())
+                       ->whereEquals('lang_id', $this->getLangId());
+
+        if ($published === true) {
+            $db->andWhereEquals('published', '1');
+        }
+
+        return $db->queryAll();
+    }
 }
