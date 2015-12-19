@@ -28,4 +28,12 @@ interface TestimonialMapperInterface
      * @return array
      */
     public function fetchById($id);
+
+    /**
+     * Deletes a testimonial by its associated id
+     * 
+     * @param string $id
+     * @return boolean
+     */
+    public function deleteByPk($id);
 }
