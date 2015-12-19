@@ -42,4 +42,15 @@ final class TestimonialMapper extends AbstractMapper implements TestimonialMappe
 
         return $db->queryAll();
     }
+
+    /**
+     * Fetches a testimonial by its associated id
+     * 
+     * @param string $id
+     * @return array
+     */
+    public function fetchById($id)
+    {
+        return $this->findByPk($id);
+    }
 }

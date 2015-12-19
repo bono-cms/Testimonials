@@ -20,4 +20,12 @@ interface TestimonialMapperInterface
      * @return array
      */
     public function fetchAll($published);
+
+    /**
+     * Fetches a testimonial by its associated id
+     * 
+     * @param string $id
+     * @return array
+     */
+    public function fetchById($id);
 }
