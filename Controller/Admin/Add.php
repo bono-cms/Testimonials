@@ -38,5 +38,19 @@ final class Add extends AbstractTestimonial
      */
     public function addAction()
     {
+        $input = $this->request->getPost('testimonial');
+        $formValidator = $this->getValidator($input);
+
+        if ($formValidator->isValid()) {
+
+            $tm = $this->getModuleService('testimonialManager');
+            $tm->add($input);
+
+            $this->flashBag->set('success', 'A testimonial has been added successfully');
+            return $tm->getLastId();
+
+        } else {
+            return $formValidator->getErrors();
+        }
     }
 }
