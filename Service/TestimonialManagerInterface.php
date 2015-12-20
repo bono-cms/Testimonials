@@ -14,6 +14,13 @@ namespace Testimonials\Service;
 interface TestimonialManagerInterface
 {
     /**
+     * Returns last id
+     * 
+     * @return integer
+     */
+    public function getLastId();
+
+    /**
      * Fetches all entities
      * 
      * @param boolean $published Whether to fetch only published ones

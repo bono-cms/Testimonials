@@ -49,6 +49,16 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     }
 
     /**
+     * Returns last id
+     * 
+     * @return integer
+     */
+    public function getLastId()
+    {
+        return $this->testimonialMapper->getLastId();
+    }
+
+    /**
      * Fetches all entities
      * 
      * @param boolean $published Whether to fetch only published ones
