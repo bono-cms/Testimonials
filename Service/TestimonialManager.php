@@ -13,6 +13,7 @@ namespace Testimonials\Service;
 
 use Cms\Service\AbstractManager;
 use Testimonials\Storage\TestimonialMapperInterface;
+use Krystal\Stdlib\VirtualEntity;
 
 final class TestimonialManager extends AbstractManager implements TestimonialManagerInterface
 {
@@ -32,5 +33,18 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     public function __construct(TestimonialMapperInterface $testimonialMapper)
     {
         $this->testimonialMapper = $testimonialMapper;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function toEntity(array $row)
+    {
+        $entity = new VirtualEntity();
+        $entity->setId($row['id'])
+               ->setAuthor($row['author'])
+               ->setContent($row['content']);
+
+        return $entity;
     }
 }
