@@ -15,5 +15,15 @@ use Cms\Controller\Admin\AbstractController;
 
 abstract class AbstractTestimonial extends AbstractController
 {
-    
+    /**
+     * Load breadcrumbs in the view
+     * 
+     * @param string $title Title for the last one
+     * @return void
+     */
+    final protected function loadBreadcrumbs($title)
+    {
+        $this->view->getBreadcrumbBag()->addOne('Testimonials', 'Testimonials:Admin:Browser@indexAction')
+                                       ->addOne($title);
+    }
 }
