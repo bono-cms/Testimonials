@@ -27,7 +27,7 @@ final class TestimonialMapper extends AbstractMapper implements TestimonialMappe
     /**
      * Fetches all testimonials
      * 
-     * @param boolnean $published Whether to fetch only published ones
+     * @param boolean $published Whether to fetch only published ones
      * @return array
      */
     public function fetchAll($published)
