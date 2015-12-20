@@ -35,5 +35,5 @@ interface TestimonialMapperInterface
      * @param string $id
      * @return boolean
      */
-    public function deleteByPk($id);
+    public function deleteById($id);
 }

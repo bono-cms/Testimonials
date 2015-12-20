@@ -60,7 +60,7 @@ final class TestimonialMapper extends AbstractMapper implements TestimonialMappe
      * @param string $id
      * @return boolean
      */
-    public function deleteByPk($id)
+    public function deleteById($id)
     {
         return $this->deleteByPk($id);
     }
