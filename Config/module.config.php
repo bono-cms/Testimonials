@@ -10,5 +10,10 @@
  */
 
 return array(
-    
+    'module' => array(
+        'name'  => 'testimonials',
+        'url'   => '/admin/module/testimonials',
+        'icon'  => '/module/Testimonials/Assets/icon.png',
+        'description' => 'This module lets you manage testimonials on your site'
+    )
 );
