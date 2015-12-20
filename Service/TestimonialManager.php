@@ -47,4 +47,15 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
 
         return $entity;
     }
+
+    /**
+     * Fetches all entities
+     * 
+     * @param boolean $published Whether to fetch only published ones
+     * @return array
+     */
+    public function fetchAll($published)
+    {
+        return $this->prepareResults($this->testimonialMapper->fetchAll($published));
+    }
 }

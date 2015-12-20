@@ -13,4 +13,11 @@ namespace Testimonials\Service;
 
 interface TestimonialManagerInterface
 {
+    /**
+     * Fetches all entities
+     * 
+     * @param boolean $published Whether to fetch only published ones
+     * @return array
+     */
+    public function fetchAll($published);
 }
