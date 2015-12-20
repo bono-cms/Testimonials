@@ -20,4 +20,12 @@ interface TestimonialManagerInterface
      * @return array
      */
     public function fetchAll($published);
+
+    /**
+     * Adds a testimonial
+     * 
+     * @param array $input Raw input data
+     * @return boolean
+     */
+    public function add(array $input);
 }

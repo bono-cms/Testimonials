@@ -58,4 +58,15 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     {
         return $this->prepareResults($this->testimonialMapper->fetchAll($published));
     }
+
+    /**
+     * Adds a testimonial
+     * 
+     * @param array $input Raw input data
+     * @return boolean
+     */
+    public function add(array $input)
+    {
+        return $this->testimonialMapper->add($input);
+    }
 }
