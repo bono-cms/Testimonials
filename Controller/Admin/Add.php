@@ -11,6 +11,8 @@
 
 namespace Testimonials\Controller\Admin;
 
+use Krystal\Stdlib\VirtualEntity;
+
 final class Add extends AbstractTestimonial
 {
     /**
@@ -20,6 +22,13 @@ final class Add extends AbstractTestimonial
      */
     public function indexAction()
     {
+        $title = 'Add testimonial';
+        $this->loadBreadcrumbs($title);
+
+        return $this->view->render('testimonials.form', array(
+            'title' => $title,
+            'testimonial' => new VirtualEntity()
+        ));
     }
 
     /**
