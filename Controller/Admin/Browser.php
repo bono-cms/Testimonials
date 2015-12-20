@@ -28,7 +28,7 @@ final class Browser extends AbstractController
 
         return $this->view->render('browser', array(
             'title' => 'Testimonials',
-            'testimonials' => $this->getModuleService('testimonialManager')->fetchAll()
+            'testimonials' => $this->getModuleService('testimonialManager')->fetchAll(false)
         ));
     }
 
