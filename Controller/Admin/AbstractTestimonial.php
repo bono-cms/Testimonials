@@ -12,6 +12,7 @@
 namespace Testimonials\Controller\Admin;
 
 use Cms\Controller\Admin\AbstractController;
+use Krystal\Validate\Pattern;
 
 abstract class AbstractTestimonial extends AbstractController
 {
@@ -25,5 +26,24 @@ abstract class AbstractTestimonial extends AbstractController
     {
         $this->view->getBreadcrumbBag()->addOne('Testimonials', 'Testimonials:Admin:Browser@indexAction')
                                        ->addOne($title);
+    }
+
+    /**
+     * Returns prepared form validator
+     * 
+     * @param array $input Raw input data
+     * @return \Krystal\Validate\ValidatorChain
+     */
+    final protected function getValidator(array $input)
+    {
+        return $this->validatorFactory->build(array(
+            'input' => array(
+                'source' => $input,
+                'definition' => array(
+                    'author' => new Pattern\Name(),
+                    'content' => new Pattern\Description()
+                )
+            )
+        ));
     }
 }
