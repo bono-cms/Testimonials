@@ -22,6 +22,14 @@ final class Browser extends AbstractController
      */
     public function indexAction()
     {
+        // Add a breadcrumb
+        $this->view->getBreadcrumbBag()
+                   ->addOne('Testimonials');
+
+        return $this->view->render('browser', array(
+            'title' => 'Testimonials',
+            'testimonials' => $this->getModuleService('testimonialManager')->fetchAll()
+        ));
     }
 
     /**
