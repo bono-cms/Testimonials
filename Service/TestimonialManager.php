@@ -77,6 +77,6 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
      */
     public function add(array $input)
     {
-        return $this->testimonialMapper->add($input);
+        return $this->testimonialMapper->insert($input);
     }
 }
