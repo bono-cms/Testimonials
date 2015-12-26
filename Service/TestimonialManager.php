@@ -49,6 +49,17 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     }
 
     /**
+     * Gets testimonial's entity by its associated id
+     * 
+     * @param string $id Testimonial id
+     * @return \Krystal\Stdlib\VirtualEntity|boolean
+     */
+    public function fetchById($id)
+    {
+        return $this->prepareResult($this->testimonialMapper->fetchById($id));
+    }
+
+    /**
      * Returns last id
      * 
      * @return integer
