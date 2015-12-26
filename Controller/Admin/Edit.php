@@ -45,5 +45,19 @@ final class Edit extends AbstractTestimonial
      */
     public function updateAction()
     {
+        $input = $this->request->getPost('testimonial');
+        $formValidator = $this->getValidator($input);
+
+        if ($formValidator->isValid()) {
+
+            $tm = $this->getModuleService('testimonialManager');
+            $tm->update($input);
+
+            $this->flashBag->set('success', 'A testimonial has been updated successfully');
+            return '1';
+
+        } else {
+            return $formValidator->getErrors();
+        }
     }
 }
