@@ -49,6 +49,17 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     }
 
     /**
+     * Deletes a testimonial by its associated id
+     * 
+     * @param string $id
+     * @return boolean
+     */
+    public function deleteById($id)
+    {
+        return $this->testimonialMapper->deleteById($id);
+    }
+
+    /**
      * Gets testimonial's entity by its associated id
      * 
      * @param string $id Testimonial id
