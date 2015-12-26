@@ -21,6 +21,21 @@ final class Edit extends AbstractTestimonial
      */
     public function indexAction($id)
     {
+        $testimonial = $this->getModuleService('testimonialManager')->fetchById($id);
+
+        if ($testimonial !== false) {
+
+            $title = 'Edit the testimonial';
+            $this->loadBreadcrumbs($title);
+
+            return $this->view->render('testimonials.form', array(
+                'title' => $title,
+                'testimonial' => $testimonial
+            ));
+
+        } else {
+            return false;
+        }
     }
 
     /**
