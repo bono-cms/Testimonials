@@ -44,6 +44,17 @@ final class TestimonialMapper extends AbstractMapper implements TestimonialMappe
     }
 
     /**
+     * Adds a testimonial
+     * 
+     * @param array $data Data to be inserted
+     * @return boolean
+     */
+    public function insert(array $data)
+    {
+        return $this->persist($this->getWithLang($data));
+    }
+
+    /**
      * Fetches a testimonial by its associated id
      * 
      * @param string $id
