@@ -40,7 +40,9 @@ final class TestimonialMapper extends AbstractMapper implements TestimonialMappe
             $db->andWhereEquals('published', '1');
         }
 
-        return $db->queryAll();
+        return $db->orderBy('id')
+                  ->desc()
+                  ->queryAll();
     }
 
     /**
