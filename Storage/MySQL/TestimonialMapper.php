@@ -25,6 +25,30 @@ final class TestimonialMapper extends AbstractMapper implements TestimonialMappe
     }
 
     /**
+     * Updates published state by associated id
+     * 
+     * @param string $id
+     * @param string $published The state
+     * @return boolean
+     */
+    public function updatePublishedById($id, $published)
+    {
+        return $this->updateColumnByPk($id, 'published', $published);
+    }
+
+    /**
+     * Updates sorting order by associated id
+     * 
+     * @param string $id
+     * @param string $order New sorting order
+     * @return boolean
+     */
+    public function updateOrderById($id, $order)
+    {
+        return $this->updateColumnByPk($id, 'order', $order);
+    }
+
+    /**
      * Fetches all testimonials
      * 
      * @param boolean $published Whether to fetch only published ones
