@@ -12,7 +12,7 @@ use Krystal\Form\Element;
 			<label class="col-lg-2 control-label"><?php $this->show('Author'); ?></label>
 			<div class="col-lg-10">
 				<div class="input-group">
-                    <?php echo Element::text('testimonial[author]', $testimonial->getAuthor(), array('class' => 'form-control')); ?>
+                    <?php echo Element::text('testimonial[author]', $testimonial->getAuthor(), array('class' => 'form-control', 'placeholder' => $this->translate('Who said this?'))); ?>
 					<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
 				</div>
 			</div>
@@ -22,7 +22,7 @@ use Krystal\Form\Element;
 			<label class="col-lg-2 control-label"><?php $this->show('Content'); ?></label>
 			<div class="col-lg-10">
 				<div class="input-group">
-                    <?php echo Element::textarea('testimonial[content]', $testimonial->getContent(), array('class' => 'form-control')); ?>
+                    <?php echo Element::textarea('testimonial[content]', $testimonial->getContent(), array('class' => 'form-control', 'placeholder' => $this->translate('What they said?'))); ?>
 					<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
 				</div>
 			</div>
@@ -41,7 +41,7 @@ use Krystal\Form\Element;
 			<label class="col-lg-2 control-label"><?php $this->show('Order'); ?></label>
 			<div class="col-lg-10">
 				<div class="input-group">
-                    <?php echo Element::number('testimonial[order]', $testimonial->getOrder(), array('class' => 'form-control', 'min' => '0')); ?>
+                    <?php echo Element::number('testimonial[order]', $testimonial->getOrder(), array('class' => 'form-control', 'min' => '0', 'placeholder' => $this->translate('Sorting order in the list'))); ?>
 					<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
 				</div>
 			</div>
