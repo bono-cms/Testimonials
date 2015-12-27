@@ -49,6 +49,23 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     }
 
     /**
+     * Deletes testimonials by their associated ids
+     * 
+     * @param array $ids
+     * @return boolean
+     */
+    public function deleteByIds(array $ids)
+    {
+        foreach ($ids as $id) {
+            if (!$this->testimonialMapper->deleteById($id)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Deletes a testimonial by its associated id
      * 
      * @param string $id
