@@ -36,6 +36,27 @@ final class Browser extends AbstractController
     }
 
     /**
+     * Saves data from the grid
+     * 
+     * @return string
+     */
+    public function saveAction()
+    {
+        if ($this->request->hasPost('order', 'published')) {
+
+            $order = $this->request->getPost('order');
+            $published = $this->request->getPost('published');
+
+            $tm = $this->getModuleService('testimonialManager');
+            $tm->updatePublishedStates($published);
+            $tm->updateSortingOrders($order);
+
+            $this->flashBag->set('success', 'Settings have been updated successfully');
+            return '1';
+        }
+    }
+
+    /**
      * Removes a testimonials by its associated id
      * 
      * @return string
