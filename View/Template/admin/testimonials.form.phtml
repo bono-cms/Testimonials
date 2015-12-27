@@ -22,7 +22,7 @@ use Krystal\Form\Element;
 			<label class="col-lg-2 control-label"><?php $this->show('Content'); ?></label>
 			<div class="col-lg-10">
 				<div class="input-group">
-                    <?php echo Element::textarea('testimonial[content]', $testimonial->getContent(), array('class' => 'form-control', 'placeholder' => $this->translate('What they said?'))); ?>
+                    <?php echo Element::textarea('testimonial[content]', $testimonial->getContent(), array('rows' => '8', 'class' => 'form-control', 'placeholder' => $this->translate('What they said?'))); ?>
 					<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
 				</div>
 			</div>
