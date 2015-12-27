@@ -14,7 +14,7 @@ use Krystal\Form\Element;
 		 <li class="divider"></li>
 		 <li class="dropdown-header"><?php $this->show('Actions'); ?></li>
 		 
-		 <?php if (!empty($reviews)): ?>
+		 <?php if (!empty($testimonials)): ?>
 		 <li><a href="#" data-button="save-changes" data-url="<?php echo $this->url('Testimonials:Admin:Browser@saveAction'); ?>"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save changes');?></a></li>
 		 <li><a href="#" data-button="remove-selected" data-url="<?php echo $this->url('Testimonials:Admin:Browser@deleteSelectedAction'); ?>"><i class="glyphicon glyphicon-remove"></i> <?php $this->show('Remove selected'); ?></a></li>
 		 <?php else: ?>
@@ -38,6 +38,9 @@ use Krystal\Form\Element;
 					</th>
 					<th class="text-center"><?php $this->show('#'); ?></th>
 					<th class="text-center"><?php $this->show('Author'); ?></th>
+					<th class="text-center"><?php $this->show('Testimonial'); ?></th>
+					<th class="text-center"><?php $this->show('Published'); ?></th>
+					<th class="text-center"><?php $this->show('Order'); ?></th>
 					<th class="text-center"><?php $this->show('Actions'); ?></th>
 				</tr>
 			</thead>
@@ -51,7 +54,13 @@ use Krystal\Form\Element;
 					</td>
 					<td class="text-center text-muted"><?php echo $testimonial->getId(); ?></td>
 					<td class="text-center"><?php echo $testimonial->getAuthor(); ?></td>
-					
+					<td class="text-center"><?php echo $testimonial->getContent(); ?></td>
+					<td class="text-center">
+                        <?php echo Element::checkbox(sprintf('published[%s]', $testimonial->getId()), $testimonial->getPublished()); ?>
+                    </td>
+					<td class="col-lg-1 text-center">
+                        <?php echo Element::number(sprintf('order[%s]', $testimonial->getId()), $testimonial->getOrder(), array('class' => 'form-control', 'min' => '0')); ?>
+                    </td>
 					<td class="text-center">
 						<a data-toggle="tooltip" data-placement="left" data-original-title="<?php $this->show('Edit this testimonial'); ?>" data-button="edit" href="<?php echo $this->url('Testimonials:Admin:Edit@indexAction', $testimonial->getId()); ?>"><i class="glyphicon glyphicon-pencil"></i></a>
 						<a data-toggle="tooltip" data-placement="left" data-original-title="<?php $this->show('Remove this testimonial'); ?>" data-button="delete" data-id="<?php echo $testimonial->getId(); ?>" data-category="main" href="#" ><i class="glyphicon glyphicon-remove"></i></a>
