@@ -25,9 +25,12 @@ final class Add extends AbstractTestimonial
         $title = 'Add testimonial';
         $this->loadBreadcrumbs($title);
 
+        $testimonial = new VirtualEntity();
+        $testimonial->setPublished(true);
+
         return $this->view->render('testimonials.form', array(
             'title' => $title,
-            'testimonial' => new VirtualEntity()
+            'testimonial' => $testimonial
         ));
     }
 
