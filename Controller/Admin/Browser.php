@@ -22,6 +22,9 @@ final class Browser extends AbstractController
      */
     public function indexAction()
     {
+        $this->view->getPluginBag()
+                   ->appendScript('@Testimonials/admin/browser.js');
+
         // Add a breadcrumb
         $this->view->getBreadcrumbBag()
                    ->addOne('Testimonials');
@@ -39,5 +42,32 @@ final class Browser extends AbstractController
      */
     public function deleteAction()
     {
+        if ($this->request->hasPost('id')) {
+            $id = $this->request->getPost('id');
+
+            $tm = $this->getModuleService('testimonialManager');
+            $tm->deleteById($id);
+
+            $this->flashBag->set('success', 'A testimonial has been removed successfully');
+            return '1';
+        }
+    }
+
+    /**
+     * Removes testimonials by their associated ids
+     * 
+     * @return string
+     */
+    public function deleteSelectedAction()
+    {
+        if ($this->request->hasPost('toDelete')) {
+            $ids = array_keys($this->request->getPost('toDelete'));
+
+            $tm = $this->getModuleService('testimonialManager');
+            $tm->deleteByIds($ids);
+
+            $this->flashBag->set('success', 'Selected testimonials have been removed successfully');
+            return '1';
+        }
     }
 }
