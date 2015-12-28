@@ -74,7 +74,7 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     public function updateSortingOrders(array $pairs)
     {
         foreach ($pairs as $id => $order) {
-            if (!$this->testimonialMapper->updateOrderById($id, $order)){
+            if (!$this->testimonialMapper->updateOrderById($id, $order)) {
                 return false;
             }
         }
@@ -91,7 +91,7 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     public function deleteByIds(array $ids)
     {
         foreach ($ids as $id) {
-            if (!$this->testimonialMapper->deleteById($id)){
+            if (!$this->testimonialMapper->deleteById($id)) {
                 return false;
             }
         }
