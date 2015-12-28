@@ -22,7 +22,7 @@ final class Add extends AbstractTestimonial
      */
     public function indexAction()
     {
-        $title = 'Add testimonial';
+        $title = 'Add new testimonial';
         $this->loadBreadcrumbs($title);
 
         $testimonial = new VirtualEntity();
