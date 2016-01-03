@@ -13,6 +13,7 @@ namespace Testimonials\Storage\MySQL;
 
 use Testimonials\Storage\TestimonialMapperInterface;
 use Cms\Storage\MySQL\AbstractMapper;
+use Krystal\Db\Sql\RawSqlFragment;
 
 final class TestimonialMapper extends AbstractMapper implements TestimonialMapperInterface
 {
@@ -61,12 +62,14 @@ final class TestimonialMapper extends AbstractMapper implements TestimonialMappe
                        ->whereEquals('lang_id', $this->getLangId());
 
         if ($published === true) {
-            $db->andWhereEquals('published', '1');
+            $db->andWhereEquals('published', '1')
+               ->orderBy(new RawSqlFragment('`order`, CASE WHEN `order` = 0 THEN `id` END DESC'));
+        } else {
+            $db->orderBy('id')
+               ->desc();
         }
 
-        return $db->orderBy('id')
-                  ->desc()
-                  ->queryAll();
+        return $db->queryAll();
     }
 
     /**
