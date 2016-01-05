@@ -13,6 +13,7 @@ namespace Testimonials;
 
 use Cms\AbstractCmsModule;
 use Testimonials\Service\TestimonialManager;
+use Testimonials\Service\SiteService;
 
 final class Module extends AbstractCmsModule
 {
@@ -25,7 +26,8 @@ final class Module extends AbstractCmsModule
         $testimonialManager = new TestimonialManager($testimonialMapper);
 
         return array(
-            'testimonialManager' => $testimonialManager
+            'testimonialManager' => $testimonialManager,
+            'siteService' => new SiteService($testimonialManager)
         );
     }
 }
