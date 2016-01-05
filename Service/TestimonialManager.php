@@ -43,7 +43,9 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
         $entity = new VirtualEntity();
         $entity->setId($row['id'])
                ->setAuthor($row['author'])
-               ->setContent($row['content']);
+               ->setContent($row['content'])
+               ->setPublished((bool) $row['published'])
+               ->setOrder((int) $row['order']);
 
         return $entity;
     }
