@@ -53,7 +53,7 @@ final class Edit extends AbstractTestimonial
             $tm = $this->getModuleService('testimonialManager');
             $tm->update($input);
 
-            $this->flashBag->set('success', 'A testimonial has been updated successfully');
+            $this->flashBag->set('success', 'The testimonial has been updated successfully');
             return '1';
 
         } else {
