@@ -36,5 +36,9 @@ return array(
 
     '/admin/module/testimonials/delete-selected.ajax' => array(
         'controller' => 'Admin:Browser@deleteSelectedAction'
+    ),
+    
+    '/admin/module/testimonials/save.ajax' => array(
+        'controller' => 'Admin:Browser@saveAction'
     )
 );
