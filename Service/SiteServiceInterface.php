@@ -13,4 +13,10 @@ namespace Testimonials\Service;
 
 interface SiteServiceInterface
 {
+    /**
+     * Returns all published testimonial entities
+     * 
+     * @return array
+     */
+    public function getAll();
 }

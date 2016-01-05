@@ -30,4 +30,14 @@ final class SiteService implements SiteServiceInterface
     {
         $this->testimonialManager = $testimonialManager;
     }
+
+    /**
+     * Returns all published testimonial entities
+     * 
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->testimonialManager->fetchAll(true);
+    }
 }
