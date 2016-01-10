@@ -50,6 +50,6 @@ final class SiteBootstrapper implements SiteBootstrapperInterface
     public function bootstrap()
     {
         $service = $this->moduleManager->getModule('Testimonials')->getService('testimonialManager');
-        $this->view->addVariable($testimonials, $service);
+        $this->view->addVariable('testimonials', $service);
     }
 }
