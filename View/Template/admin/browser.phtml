@@ -10,13 +10,13 @@ use Krystal\Form\Element;
 		<i class="glyphicon glyphicon-list"></i> <?php $this->show('Menu'); ?> <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu">
-		 <li><a href="<?php echo $this->url('Testimonials:Admin:Add@indexAction'); ?>"><i class="glyphicon glyphicon-file"></i> <?php $this->show('Add new testimonial'); ?></a></li>
+		 <li><a href="<?php echo $this->url('Testimonials:Admin:Testimonial@addAction'); ?>"><i class="glyphicon glyphicon-file"></i> <?php $this->show('Add new testimonial'); ?></a></li>
 		 <li class="divider"></li>
 		 <li class="dropdown-header"><?php $this->show('Actions'); ?></li>
 		 
 		 <?php if (!empty($testimonials)): ?>
-		 <li><a href="#" data-button="save-changes" data-url="<?php echo $this->url('Testimonials:Admin:Browser@saveAction'); ?>"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save changes');?></a></li>
-		 <li><a href="#" data-button="remove-selected" data-url="<?php echo $this->url('Testimonials:Admin:Browser@deleteSelectedAction'); ?>"><i class="glyphicon glyphicon-remove"></i> <?php $this->show('Remove selected'); ?></a></li>
+		 <li><a href="#" data-button="save-changes" data-url="<?php echo $this->url('Testimonials:Admin:Testimonial@tweakAction'); ?>"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save changes');?></a></li>
+		 <li><a href="#" data-button="remove-selected" data-url="<?php echo $this->url('Testimonials:Admin:Testimonial@deleteAction'); ?>"><i class="glyphicon glyphicon-remove"></i> <?php $this->show('Remove selected'); ?></a></li>
 		 <?php else: ?>
 		 <li class="disabled"><a><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save changes');?></a></li>
 		 <li class="disabled"><a><i class="glyphicon glyphicon-remove"></i> <?php $this->show('Remove selected'); ?></a></li>
@@ -64,7 +64,7 @@ use Krystal\Form\Element;
                         <?php echo Element::number(sprintf('order[%s]', $testimonial->getId()), $testimonial->getOrder(), array('class' => 'form-control', 'min' => '0')); ?>
                     </td>
 					<td class="text-center">
-						<a data-toggle="tooltip" data-placement="left" data-original-title="<?php $this->show('Edit this testimonial'); ?>" data-button="edit" href="<?php echo $this->url('Testimonials:Admin:Edit@indexAction', $testimonial->getId()); ?>"><i class="glyphicon glyphicon-pencil"></i></a>
+						<a data-toggle="tooltip" data-placement="left" data-original-title="<?php $this->show('Edit this testimonial'); ?>" data-button="edit" href="<?php echo $this->url('Testimonials:Admin:Testimonial@editAction', $testimonial->getId()); ?>"><i class="glyphicon glyphicon-pencil"></i></a>
 						<a data-toggle="tooltip" data-placement="left" data-original-title="<?php $this->show('Remove this testimonial'); ?>" data-button="delete" data-id="<?php echo $testimonial->getId(); ?>" data-category="main" href="#" ><i class="glyphicon glyphicon-remove"></i></a>
 					</td>
 				</tr>
@@ -72,7 +72,6 @@ use Krystal\Form\Element;
 				
 			</tbody>
 			<?php endif; ?>
-			
 		</table>
 		
 		<?php if (empty($testimonials)): ?>
@@ -80,6 +79,5 @@ use Krystal\Form\Element;
 			<h2 class="text-center text-muted"><i class="glyphicon glyphicon-remove"></i> <?php $this->show('No testimonials'); ?></h2>
 		</div>
 		<?php endif; ?>
-		
 	</div>
 </form>

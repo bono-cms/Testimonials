@@ -50,16 +50,16 @@ use Krystal\Form\Element;
 
     <?php if ($testimonial->getId()): ?>
 
-    <button data-button="save" data-url="<?php echo $this->url('Testimonials:Admin:Edit@updateAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save'); ?></button>
-	<button data-button="save-create" data-back-url="<?php echo $this->url('Testimonials:Admin:Add@indexAction'); ?>" data-url="<?php echo $this->url('Testimonials:Admin:Edit@updateAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save & Create new'); ?></button>
+    <button data-button="save" data-url="<?php echo $this->url('Testimonials:Admin:Testimonial@saveAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save'); ?></button>
+	<button data-button="save-create" data-back-url="<?php echo $this->url('Testimonials:Admin:Testimonial@addAction'); ?>" data-url="<?php echo $this->url('Testimonials:Admin:Testimonial@saveAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save & Create new'); ?></button>
 
 	<?php else: ?>
 
-	<button data-button="add" data-back-url="<?php echo $this->url('Testimonials:Admin:Edit@indexAction', null); ?>" data-url="<?php echo $this->url('Testimonials:Admin:Add@addAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Add'); ?></button>
-	<button data-button="add-create" data-url="<?php echo $this->url('Testimonials:Admin:Add@addAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Add & Create new'); ?></button>
+	<button data-button="add" data-back-url="<?php echo $this->url('Testimonials:Admin:Testimonial@editAction', null); ?>" data-url="<?php echo $this->url('Testimonials:Admin:Testimonial@saveAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Add'); ?></button>
+	<button data-button="add-create" data-url="<?php echo $this->url('Testimonials:Admin:Testimonial@saveAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Add & Create new'); ?></button>
 
 	<?php endif; ?>
 
-	<button data-button="cancel" data-url="<?php echo $this->url('Testimonials:Admin:Browser@indexAction'); ?>" class="btn btn-default"><i class="glyphicon glyphicon-floppy-remove"></i> <?php $this->show('Cancel'); ?></button>
+	<button data-button="cancel" data-url="<?php echo $this->url('Testimonials:Admin:Testimonial@gridAction'); ?>" class="btn btn-default"><i class="glyphicon glyphicon-floppy-remove"></i> <?php $this->show('Cancel'); ?></button>
 
 </form>

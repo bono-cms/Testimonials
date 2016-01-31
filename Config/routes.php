@@ -11,34 +11,26 @@
 
 return array(
     '/admin/module/testimonials' => array(
-        'controller' => 'Admin:Browser@indexAction'
+        'controller' => 'Admin:Testimonial@gridAction'
     ),
     
     '/admin/module/testimonials/add' => array(
-        'controller' => 'Admin:Add@indexAction'
-    ),
-    
-    '/admin/module/testimonials/add.ajax' => array(
-        'controller' => 'Admin:Add@addAction'
+        'controller' => 'Admin:Testimonial@addAction'
     ),
     
     '/admin/module/testimonials/edit/(:var)' => array(
-        'controller' => 'Admin:Edit@indexAction'
+        'controller' => 'Admin:Testimonial@editAction'
     ),
     
-    '/admin/module/testimonials/edit.ajax' => array(
-        'controller' => 'Admin:Edit@updateAction'
+    '/admin/module/testimonials/save' => array(
+        'controller' => 'Admin:Testimonial@saveAction'
     ),
     
-    '/admin/module/testimonials/delete.ajax' => array(
-        'controller' => 'Admin:Browser@deleteAction'
+    '/admin/module/testimonials/delete' => array(
+        'controller' => 'Admin:Testimonial@deleteAction'
     ),
 
-    '/admin/module/testimonials/delete-selected.ajax' => array(
-        'controller' => 'Admin:Browser@deleteSelectedAction'
-    ),
-    
-    '/admin/module/testimonials/save.ajax' => array(
-        'controller' => 'Admin:Browser@saveAction'
+    '/admin/module/testimonials/tweak' => array(
+        'controller' => 'Admin:Testimonial@tweakAction'
     )
 );
