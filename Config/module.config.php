@@ -13,7 +13,7 @@ return array(
     'module' => array(
         'name'  => 'Testimonials',
         'url'   => '/admin/module/testimonials',
-        'icon'  => '/module/Testimonials/Assets/icon.png',
+        'icon'  => 'fa fa-mixcloud fa-5x',
         'description' => 'This module lets you manage testimonials on your site'
     )
 );

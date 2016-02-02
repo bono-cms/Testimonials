@@ -112,27 +112,7 @@ final class Testimonial extends AbstractController
      */
     public function deleteAction()
     {
-        // Batch removal
-        if ($this->request->hasPost('toDelete')) {
-            $ids = array_keys($this->request->getPost('toDelete'));
-
-            $tm = $this->getModuleService('testimonialManager');
-            $tm->deleteByIds($ids);
-
-            $this->flashBag->set('success', 'Selected testimonials have been removed successfully');
-        }
-
-        // Single removal
-        if ($this->request->hasPost('id')) {
-            $id = $this->request->getPost('id');
-
-            $tm = $this->getModuleService('testimonialManager');
-            $tm->deleteById($id);
-
-            $this->flashBag->set('success', 'A testimonial has been removed successfully');
-        }
-
-        return '1';
+        return $this->invokeRemoval('testimonialManager');
     }
 
     /**
@@ -144,7 +124,7 @@ final class Testimonial extends AbstractController
     {
         $input = $this->request->getPost('testimonial');
 
-        $formValidator = $this->validatorFactory->build(array(
+        return $this->invokeSave('testimonialManager', $input['id'], $input, array(
             'input' => array(
                 'source' => $input,
                 'definition' => array(
@@ -153,25 +133,5 @@ final class Testimonial extends AbstractController
                 )
             )
         ));
-
-        if ($formValidator->isValid()) {
-            $tm = $this->getModuleService('testimonialManager');
-
-            if ($input['id']) {
-                $tm = $this->getModuleService('testimonialManager');
-                $tm->update($input);
-
-                $this->flashBag->set('success', 'The testimonial has been updated successfully');
-                return '1';
-            } else {
-                $tm->add($input);
-
-                $this->flashBag->set('success', 'A testimonial has been added successfully');
-                return $tm->getLastId();
-            }
-
-        } else {
-            return $formValidator->getErrors();
-        }
     }
 }
