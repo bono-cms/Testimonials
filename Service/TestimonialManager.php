@@ -12,6 +12,7 @@
 namespace Testimonials\Service;
 
 use Cms\Service\AbstractManager;
+use Cms\Service\HistoryManagerInterface;
 use Testimonials\Storage\TestimonialMapperInterface;
 use Krystal\Stdlib\VirtualEntity;
 
@@ -25,14 +26,23 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     private $testimonialMapper;
 
     /**
+     * History manager to keep tracks
+     * 
+     * @var \Cms\Service\HistoryManagerInterface
+     */
+    private $historyManager;
+
+    /**
      * State initialization
      * 
      * @param \Testimonials\Storage\TestimonialMapperInterface $testimonialMapper
+     * @param \Cms\Service\HistoryManagerInterface $historyManager
      * @return void
      */
-    public function __construct(TestimonialMapperInterface $testimonialMapper)
+    public function __construct(TestimonialMapperInterface $testimonialMapper, HistoryManagerInterface $historyManager)
     {
         $this->testimonialMapper = $testimonialMapper;
+        $this->historyManager = $historyManager;
     }
 
     /**

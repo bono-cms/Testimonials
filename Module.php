@@ -23,7 +23,7 @@ final class Module extends AbstractCmsModule
     public function getServiceProviders()
     {
         $testimonialMapper = $this->getMapper('/Testimonials/Storage/MySQL/TestimonialMapper');
-        $testimonialManager = new TestimonialManager($testimonialMapper);
+        $testimonialManager = new TestimonialManager($testimonialMapper, $this->getHistoryManager());
 
         return array(
             'testimonialManager' => $testimonialManager,
