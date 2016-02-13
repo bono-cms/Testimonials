@@ -46,6 +46,18 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     }
 
     /**
+     * Tracks activity
+     * 
+     * @param string $message
+     * @param string $placeholder
+     * @return boolean
+     */
+    private function track($message, $placeholder)
+    {
+        return $this->historyManager->write('Testimonials', $message, $placeholder);
+    }
+
+    /**
      * {@inheritDoc}
      */
     protected function toEntity(array $row)
@@ -108,6 +120,7 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
             }
         }
 
+        $this->track('%s testimonials have been removed', count($ids));
         return true;
     }
 
@@ -119,7 +132,14 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
      */
     public function deleteById($id)
     {
-        return $this->testimonialMapper->deleteById($id);
+        $author = $this->testimonialMapper->fetchAuthorById($id);
+
+        if ($this->testimonialMapper->deleteById($id)) {
+            $this->track('A testimonial by %s has been removed', $author);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -162,6 +182,7 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
      */
     public function update(array $input)
     {
+        $this->track('The testimonial by %s has been updated', $input['author']);
         return $this->testimonialMapper->update($input);
     }
 
@@ -173,6 +194,7 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
      */
     public function add(array $input)
     {
+        $this->track('A testimonial by %s has been added', $input['author']);
         return $this->testimonialMapper->insert($input);
     }
 }
