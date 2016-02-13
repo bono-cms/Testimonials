@@ -14,6 +14,14 @@ namespace Testimonials\Storage;
 interface TestimonialMapperInterface
 {
     /**
+     * Fetches author's name by their associated id
+     * 
+     * @param string $id
+     * @return string
+     */
+    public function fetchAuthorById($id);
+
+    /**
      * Fetches all testimonials
      * 
      * @param boolean $published Whether to fetch only published ones

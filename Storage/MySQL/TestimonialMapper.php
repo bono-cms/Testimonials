@@ -26,6 +26,17 @@ final class TestimonialMapper extends AbstractMapper implements TestimonialMappe
     }
 
     /**
+     * Fetches author's name by their associated id
+     * 
+     * @param string $id
+     * @return string
+     */
+    public function fetchAuthorById($id)
+    {
+        return $this->findColumnByPk($id, 'author');
+    }
+
+    /**
      * Updates published state by associated id
      * 
      * @param string $id
