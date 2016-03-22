@@ -22,7 +22,7 @@ final class TestimonialMapper extends AbstractMapper implements TestimonialMappe
      */
     public static function getTableName()
     {
-        return 'bono_module_testimonials';
+        return self::getWithPrefix('bono_module_testimonials');
     }
 
     /**
