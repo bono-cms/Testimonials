@@ -28,7 +28,7 @@ final class Testimonial extends AbstractController
         // Append breadcrumbs
         $this->view->getBreadcrumbBag()->addOne('Testimonials', 'Testimonials:Admin:Testimonial@gridAction')
                                        ->addOne($title);
-        
+
         return $this->view->render('testimonials.form', array(
             'testimonial' => $testimonial
         ));
@@ -71,9 +71,6 @@ final class Testimonial extends AbstractController
      */
     public function gridAction()
     {
-        $this->view->getPluginBag()
-                   ->appendScript('@Testimonials/admin/browser.js');
-
         // Add a breadcrumb
         $this->view->getBreadcrumbBag()
                    ->addOne('Testimonials');
@@ -108,11 +105,12 @@ final class Testimonial extends AbstractController
     /**
      * Removes a testimonials by its associated id
      * 
+     * @param string $id
      * @return string
      */
-    public function deleteAction()
+    public function deleteAction($id)
     {
-        return $this->invokeRemoval('testimonialManager');
+        return $this->invokeRemoval('testimonialManager', $id);
     }
 
     /**

@@ -26,7 +26,7 @@ return array(
         'controller' => 'Admin:Testimonial@saveAction'
     ),
     
-    '/admin/module/testimonials/delete' => array(
+    '/admin/module/testimonials/delete/(:var)' => array(
         'controller' => 'Admin:Testimonial@deleteAction'
     ),
 
