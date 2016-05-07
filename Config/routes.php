@@ -10,27 +10,27 @@
  */
 
 return array(
-    '/admin/module/testimonials' => array(
+    '/%s/module/testimonials' => array(
         'controller' => 'Admin:Testimonial@gridAction'
     ),
     
-    '/admin/module/testimonials/add' => array(
+    '/%s/module/testimonials/add' => array(
         'controller' => 'Admin:Testimonial@addAction'
     ),
     
-    '/admin/module/testimonials/edit/(:var)' => array(
+    '/%s/module/testimonials/edit/(:var)' => array(
         'controller' => 'Admin:Testimonial@editAction'
     ),
     
-    '/admin/module/testimonials/save' => array(
+    '/%s/module/testimonials/save' => array(
         'controller' => 'Admin:Testimonial@saveAction'
     ),
     
-    '/admin/module/testimonials/delete/(:var)' => array(
+    '/%s/module/testimonials/delete/(:var)' => array(
         'controller' => 'Admin:Testimonial@deleteAction'
     ),
 
-    '/admin/module/testimonials/tweak' => array(
+    '/%s/module/testimonials/tweak' => array(
         'controller' => 'Admin:Testimonial@tweakAction'
     )
 );
