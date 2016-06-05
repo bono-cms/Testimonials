@@ -63,11 +63,11 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     protected function toEntity(array $row)
     {
         $entity = new VirtualEntity();
-        $entity->setId($row['id'])
-               ->setAuthor($row['author'])
-               ->setContent($row['content'])
-               ->setPublished((bool) $row['published'])
-               ->setOrder((int) $row['order']);
+        $entity->setId($row['id'], VirtualEntity::FILTER_INT)
+               ->setAuthor($row['author'], VirtualEntity::FILTER_TAGS)
+               ->setContent($row['content'], VirtualEntity::FILTER_TAGS)
+               ->setPublished($row['published'], VirtualEntity::FILTER_BOOL)
+               ->setOrder($row['order'], VirtualEntity::FILTER_INT);
 
         return $entity;
     }
