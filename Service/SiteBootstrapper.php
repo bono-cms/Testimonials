@@ -20,7 +20,7 @@ final class SiteBootstrapper extends AbstractSiteBootstrapper
      */
     public function bootstrap()
     {
-        $service = $this->moduleManager->getModule('Testimonials')->getService('testimonialManager');
+        $service = $this->moduleManager->getModule('Testimonials')->getService('siteService');
         $this->view->addVariable('testimonials', $service);
     }
 }
