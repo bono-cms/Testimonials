@@ -182,6 +182,8 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
      */
     public function update(array $input)
     {
+        $input['order'] = (int) $input['order'];
+
         $this->track('The testimonial by %s has been updated', $input['author']);
         return $this->testimonialMapper->update($input);
     }
@@ -194,6 +196,8 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
      */
     public function add(array $input)
     {
+        $input['order'] = (int) $input['order'];
+
         $this->track('A testimonial by %s has been added', $input['author']);
         return $this->testimonialMapper->insert($input);
     }
