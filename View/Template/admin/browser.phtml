@@ -56,8 +56,8 @@ use Krystal\Form\Element;
 						<input type="checkbox" name="toDelete[<?php echo $testimonial->getId(); ?>]" />
 					</td>
 					<td class="text-center text-muted"><?php echo $testimonial->getId(); ?></td>
-					<td class="text-center"><?php echo $testimonial->getAuthor(); ?></td>
-					<td class="text-center"><?php echo $testimonial->getContent(); ?></td>
+					<td><?php echo $testimonial->getAuthor(); ?></td>
+					<td><?php echo $testimonial->getContent(); ?></td>
 					<td class="text-center">
                         <?php echo Element::checkbox(sprintf('published[%s]', $testimonial->getId()), $testimonial->getPublished()); ?>
                     </td>
