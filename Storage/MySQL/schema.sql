@@ -6,5 +6,5 @@ CREATE TABLE `bono_module_testimonials` (
     `published` varchar(1) NOT NULL,
     `order` INT NOT NULL,
     `author` varchar(100),
-    `content` TEXT   
+    `content` LONGTEXT   
 ) DEFAULT CHARSET = UTF8;
