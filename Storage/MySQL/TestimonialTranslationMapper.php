@@ -11,18 +11,15 @@
 
 namespace Testimonials\Storage\MySQL;
 
-use Cms\Storage\MySQL\AbstractStorageDropper;
+use Cms\Storage\MySQL\AbstractMapper;
 
-final class Dropper extends AbstractStorageDropper
+final class TestimonialTranslationMapper extends AbstractMapper
 {
     /**
      * {@inheritDoc}
      */
-    protected function getTables()
+    public static function getTableName()
     {
-        return array(
-            TestimonialMapper::getTableName(),
-            TestimonialTranslationMapper::getTableName()
-        );
+        return self::getWithPrefix('bono_module_testimonials_translations');
     }
 }
