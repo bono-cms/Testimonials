@@ -14,6 +14,14 @@ namespace Testimonials\Storage;
 interface TestimonialMapperInterface
 {
     /**
+     * Update settings
+     * 
+     * @param array $settings
+     * @return boolean
+     */
+    public function updateSettings(array $settings);
+
+    /**
      * Fetches author's name by their associated id
      * 
      * @param string $id

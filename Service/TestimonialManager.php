@@ -74,37 +74,14 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     }
 
     /**
-     * Updates publication states by associated ids
+     * Update settings
      * 
-     * @param array $pairs
+     * @param array $settings
      * @return boolean
      */
-    public function updatePublishedStates(array $pairs)
+    public function updateSettings(array $settings)
     {
-        foreach ($pairs as $id => $state) {
-            if (!$this->testimonialMapper->updatePublishedById($id, $state)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Updates sorting order by associated ids
-     * 
-     * @param array $pairs
-     * @return boolean
-     */
-    public function updateSortingOrders(array $pairs)
-    {
-        foreach ($pairs as $id => $order) {
-            if (!$this->testimonialMapper->updateOrderById($id, $order)) {
-                return false;
-            }
-        }
-
-        return true;
+        return $this->testimonialMapper->updateSettings($settings);
     }
 
     /**

@@ -14,6 +14,14 @@ namespace Testimonials\Service;
 interface TestimonialManagerInterface
 {
     /**
+     * Update settings
+     * 
+     * @param array $settings
+     * @return boolean
+     */
+    public function updateSettings(array $settings);
+
+    /**
      * Returns last id
      * 
      * @return integer

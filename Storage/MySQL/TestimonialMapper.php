@@ -62,27 +62,14 @@ final class TestimonialMapper extends AbstractMapper implements TestimonialMappe
     }
 
     /**
-     * Updates published state by associated id
+     * Update settings
      * 
-     * @param string $id
-     * @param string $published The state
+     * @param array $settings
      * @return boolean
      */
-    public function updatePublishedById($id, $published)
+    public function updateSettings(array $settings)
     {
-        return $this->updateColumnByPk($id, 'published', $published);
-    }
-
-    /**
-     * Updates sorting order by associated id
-     * 
-     * @param string $id
-     * @param string $order New sorting order
-     * @return boolean
-     */
-    public function updateOrderById($id, $order)
-    {
-        return $this->updateColumnByPk($id, 'order', $order);
+        return $this->updateColumns($settings, array('order', 'published'));
     }
 
     /**

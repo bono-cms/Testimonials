@@ -89,18 +89,11 @@ final class Testimonial extends AbstractController
      */
     public function tweakAction()
     {
-        if ($this->request->hasPost('order', 'published')) {
+        $tm = $this->getModuleService('testimonialManager');
+        $tm->updateSettings($this->request->getPost());
 
-            $order = $this->request->getPost('order');
-            $published = $this->request->getPost('published');
-
-            $tm = $this->getModuleService('testimonialManager');
-            $tm->updatePublishedStates($published);
-            $tm->updateSortingOrders($order);
-
-            $this->flashBag->set('success', 'Settings have been updated successfully');
-            return '1';
-        }
+        $this->flashBag->set('success', 'Settings have been updated successfully');
+        return '1';
     }
 
     /**
