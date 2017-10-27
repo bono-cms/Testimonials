@@ -1,6 +1,8 @@
 <?php
 
 use Krystal\Form\Element;
+use Cms\Service\LanguageManager;
+
 defined('KRYSTAL') or die;
 
 ?>
@@ -14,37 +16,54 @@ defined('KRYSTAL') or die;
     <div class="tab-content">
         <div class="tab-pane fade in active" id="testimonial" role="tabpanel">
             <div class="well">
-                <?php echo Element::hidden('testimonial[id]', $testimonial->getId()); ?>
+                <?php $this->loadPartial('language-tabs'); ?>
 
-                <div class="form-group">
-                    <label class="col-lg-2 control-label"><?php $this->show('Author'); ?></label>
-                    <div class="col-lg-10">
-                        <div class="input-group">
-                            <?php echo Element::text('testimonial[author]', $testimonial->getAuthor(), array('class' => 'form-control', 'placeholder' => $this->translate('Who said this?'))); ?>
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        </div>
-                    </div>
-                </div>
+                <div class="tab-content">
+                    <?php foreach ($languages as $index => $language): ?>
+                    <div class="tab-pane fade in <?php echo $index == 0 ? 'active' : null; ?>" id="<?php printf('language-%s', $language->getId()); ?>" role="tabpanel">
 
-                <div class="form-group">
-                    <label class="col-lg-2 control-label"><?php $this->show('Content'); ?></label>
-                    <div class="col-lg-10">
-                        <div class="input-group">
-                            <?php echo Element::textarea('testimonial[content]', $testimonial->getContent(), array('rows' => '8', 'class' => 'form-control', 'placeholder' => $this->translate('What they said?'))); ?>
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        <?php $entity = LanguageManager::findByLangId($language->getId(), $testimonial); ?>
+
+                        <?php echo Element::hidden(sprintf('translation[%s][id]', $language->getId()), $entity->getId()); ?>
+                        <?php echo Element::hidden(sprintf('translation[%s][lang_id]', $language->getId()), $language->getId()); ?>
+
+                        <?php $this->loadPartial('language-name', array('language' => $language)); ?>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"><?php $this->show('Author'); ?></label>
+                            <div class="col-lg-10">
+                                <div class="input-group">
+                                    <?php echo Element::text(sprintf('translation[%s][author]', $language->getId()), $entity->getAuthor(), array('class' => 'form-control', 'placeholder' => $this->translate('Who said this?'))); ?>
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"><?php $this->show('Content'); ?></label>
+                            <div class="col-lg-10">
+                                <div class="input-group">
+                                    <?php echo Element::textarea(sprintf('translation[%s][content]', $language->getId()), $entity->getContent(), array('rows' => '8', 'class' => 'form-control', 'placeholder' => $this->translate('What they said?'))); ?>
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
 
         <div class="tab-pane fade in" id="configuration" role="tabpanel">
             <div class="well">
+                <?php echo Element::hidden('testimonial[id]', $entity->getId()); ?>
+
                 <div class="form-group">
                     <label class="col-lg-2 control-label"><?php $this->show('Published'); ?></label>
                     <div class="col-lg-10">
                         <div class="input-group">
-                            <?php echo Element::checkbox('testimonial[published]', $testimonial->getPublished()); ?>
+                            <?php echo Element::checkbox('testimonial[published]', $entity->getPublished()); ?>
                         </div>
                     </div>
                 </div>
@@ -53,7 +72,7 @@ defined('KRYSTAL') or die;
                     <label class="col-lg-2 control-label"><?php $this->show('Order'); ?></label>
                     <div class="col-lg-10">
                         <div class="input-group">
-                            <?php echo Element::number('testimonial[order]', $testimonial->getOrder(), array('class' => 'form-control', 'min' => '0', 'placeholder' => $this->translate('Sorting order in the list'))); ?>
+                            <?php echo Element::number('testimonial[order]', $entity->getOrder(), array('class' => 'form-control', 'min' => '0', 'placeholder' => $this->translate('Sorting order in the list'))); ?>
                             <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         </div>
                     </div>
@@ -62,7 +81,7 @@ defined('KRYSTAL') or die;
         </div>
     </div>
 
-    <?php if ($testimonial->getId()): ?>
+    <?php if ($entity->getId()): ?>
 
     <button data-button="save" data-url="<?php echo $this->url('Testimonials:Admin:Testimonial@saveAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save'); ?></button>
 	<button data-button="save-create" data-back-url="<?php echo $this->url('Testimonials:Admin:Testimonial@addAction'); ?>" data-url="<?php echo $this->url('Testimonials:Admin:Testimonial@saveAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save & Create new'); ?></button>

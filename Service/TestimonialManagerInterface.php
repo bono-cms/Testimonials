@@ -29,6 +29,15 @@ interface TestimonialManagerInterface
     public function fetchAll($published);
 
     /**
+     * Gets testimonial's entity by its associated id
+     * 
+     * @param string $id Testimonial id
+     * @param boolean $withTranslations Whether to fetch translations or not
+     * @return \Krystal\Stdlib\VirtualEntity|boolean
+     */
+    public function fetchById($id, $withTranslations);
+
+    /**
      * Adds a testimonial
      * 
      * @param array $input Raw input data

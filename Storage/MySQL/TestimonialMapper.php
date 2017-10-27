@@ -26,6 +26,31 @@ final class TestimonialMapper extends AbstractMapper implements TestimonialMappe
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public static function getTranslationTable()
+    {
+        return TestimonialTranslationMapper::getTableName();
+    }
+
+    /**
+     * Returns shared columns to be selected
+     * 
+     * @return array
+     */
+    private function getColumns()
+    {
+        return array(
+            self::getFullColumnName('id'),
+            self::getFullColumnName('order'),
+            self::getFullColumnName('published'),
+            TestimonialTranslationMapper::getFullColumnName('lang_id'),
+            TestimonialTranslationMapper::getFullColumnName('author'),
+            TestimonialTranslationMapper::getFullColumnName('content')
+        );
+    }
+
+    /**
      * Fetches author's name by their associated id
      * 
      * @param string $id
@@ -61,6 +86,18 @@ final class TestimonialMapper extends AbstractMapper implements TestimonialMappe
     }
 
     /**
+     * Fetches testimonial data by its associated id
+     * 
+     * @param string $id Testimonial id
+     * @param boolean $withTranslations Whether to fetch translations or not
+     * @return array
+     */
+    public function fetchById($id, $withTranslations)
+    {
+        return $this->findEntity($this->getColumns(), $id, $withTranslations);
+    }
+
+    /**
      * Fetches all testimonials
      * 
      * @param boolean $published Whether to fetch only published ones
@@ -68,62 +105,18 @@ final class TestimonialMapper extends AbstractMapper implements TestimonialMappe
      */
     public function fetchAll($published)
     {
-        $db = $this->db->select('*')
-                       ->from(self::getTableName())
-                       ->whereEquals('lang_id', $this->getLangId());
+        $db = $this->createEntitySelect($this->getColumns())
+                   // Language ID constraint
+                   ->whereEquals(TestimonialTranslationMapper::getFullColumnName('lang_id'), $this->getLangId());
 
         if ($published === true) {
-            $db->andWhereEquals('published', '1')
+            $db->andWhereEquals(self::getFullColumnName('published'), '1')
                ->orderBy(new RawSqlFragment('`order`, CASE WHEN `order` = 0 THEN `id` END DESC'));
         } else {
-            $db->orderBy('id')
+            $db->orderBy(self::getFullColumnName('id'))
                ->desc();
         }
 
         return $db->queryAll();
-    }
-
-    /**
-     * Adds a testimonial
-     * 
-     * @param array $data Data to be inserted
-     * @return boolean
-     */
-    public function update(array $data)
-    {
-        return $this->persist($data);
-    }
-
-    /**
-     * Adds a testimonial
-     * 
-     * @param array $data Data to be inserted
-     * @return boolean
-     */
-    public function insert(array $data)
-    {
-        return $this->persist($this->getWithLang($data));
-    }
-
-    /**
-     * Fetches a testimonial by its associated id
-     * 
-     * @param string $id
-     * @return array
-     */
-    public function fetchById($id)
-    {
-        return $this->findByPk($id);
-    }
-
-    /**
-     * Deletes a testimonial by its associated id
-     * 
-     * @param string $id
-     * @return boolean
-     */
-    public function deleteById($id)
-    {
-        return $this->deleteByPk($id);
     }
 }

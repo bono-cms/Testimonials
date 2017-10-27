@@ -64,6 +64,7 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     {
         $entity = new VirtualEntity();
         $entity->setId($row['id'], VirtualEntity::FILTER_INT)
+               ->setLangId($row['lang_id'], VirtualEntity::FILTER_INT)
                ->setAuthor($row['author'], VirtualEntity::FILTER_HTML)
                ->setContent($row['content'], VirtualEntity::FILTER_HTML)
                ->setPublished($row['published'], VirtualEntity::FILTER_BOOL)
@@ -114,11 +115,7 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
      */
     public function deleteByIds(array $ids)
     {
-        foreach ($ids as $id) {
-            if (!$this->testimonialMapper->deleteById($id)) {
-                return false;
-            }
-        }
+        $this->testimonialMapper->deleteEntity($ids);
 
         $this->track('%s testimonials have been removed', count($ids));
         return true;
@@ -132,10 +129,10 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
      */
     public function deleteById($id)
     {
-        $author = $this->testimonialMapper->fetchAuthorById($id);
+        //$author = $this->testimonialMapper->fetchAuthorById($id);
 
-        if ($this->testimonialMapper->deleteById($id)) {
-            $this->track('A testimonial by %s has been removed', $author);
+        if ($this->testimonialMapper->deleteEntity($id)) {
+            //$this->track('A testimonial by %s has been removed', $author);
             return true;
         } else {
             return false;
@@ -146,11 +143,16 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
      * Gets testimonial's entity by its associated id
      * 
      * @param string $id Testimonial id
+     * @param boolean $withTranslations Whether to fetch translations or not
      * @return \Krystal\Stdlib\VirtualEntity|boolean
      */
-    public function fetchById($id)
+    public function fetchById($id, $withTranslations)
     {
-        return $this->prepareResult($this->testimonialMapper->fetchById($id));
+        if ($withTranslations == true) {
+            return $this->prepareResults($this->testimonialMapper->fetchById($id, true));
+        } else {
+            return $this->prepareResult($this->testimonialMapper->fetchById($id, false));
+        }
     }
 
     /**
@@ -182,10 +184,10 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
      */
     public function update(array $input)
     {
-        $input['order'] = (int) $input['order'];
+        //$input['order'] = (int) $input['order'];
 
-        $this->track('The testimonial by %s has been updated', $input['author']);
-        return $this->testimonialMapper->update($input);
+        //$this->track('The testimonial by %s has been updated', $input['author']);
+        return $this->testimonialMapper->saveEntity($input['testimonial'], $input['translation']);
     }
 
     /**
@@ -196,9 +198,9 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
      */
     public function add(array $input)
     {
-        $input['order'] = (int) $input['order'];
+        //$input['order'] = (int) $input['order'];
 
-        $this->track('A testimonial by %s has been added', $input['author']);
-        return $this->testimonialMapper->insert($input);
+        //$this->track('A testimonial by %s has been added', $input['author']);
+        return $this->testimonialMapper->saveEntity($input['testimonial'], $input['translation']);
     }
 }

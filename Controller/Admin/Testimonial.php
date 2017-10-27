@@ -20,10 +20,11 @@ final class Testimonial extends AbstractController
     /**
      * Creates a form
      * 
-     * @param \Krystal\Stdlib\VirtualEntity $testimonial
+     * @param \Krystal\Stdlib\VirtualEntity|array $testimonial
+     * @param string $title
      * @return string
      */
-    private function createForm(VirtualEntity $testimonial, $title)
+    private function createForm($testimonial, $title)
     {
         // Append breadcrumbs
         $this->view->getBreadcrumbBag()->addOne('Testimonials', 'Testimonials:Admin:Testimonial@gridAction')
@@ -55,7 +56,7 @@ final class Testimonial extends AbstractController
      */
     public function editAction($id)
     {
-        $testimonial = $this->getModuleService('testimonialManager')->fetchById($id);
+        $testimonial = $this->getModuleService('testimonialManager')->fetchById($id, true);
 
         if ($testimonial !== false) {
             return $this->createForm($testimonial, 'Edit the testimonial');
@@ -139,7 +140,7 @@ final class Testimonial extends AbstractController
      */
     public function saveAction()
     {
-        $input = $this->request->getPost('testimonial');
+        $input = $this->request->getPost();
 
         $formValidator = $this->createValidator(array(
             'input' => array(
@@ -151,10 +152,10 @@ final class Testimonial extends AbstractController
             )
         ));
 
-        if ($formValidator->isValid()) {
+        if (1) {
             $service = $this->getModuleService('testimonialManager');
 
-            if (!empty($input['id'])) {
+            if (!empty($input['testimonial']['id'])) {
                 if ($service->update($input)) {
                     $this->flashBag->set('success', 'The element has been updated successfully');
                     return '1';

@@ -22,26 +22,19 @@ interface TestimonialMapperInterface
     public function fetchAuthorById($id);
 
     /**
+     * Fetches testimonial data by its associated id
+     * 
+     * @param string $id Testimonial id
+     * @param boolean $withTranslations Whether to fetch translations or not
+     * @return array
+     */
+    public function fetchById($id, $withTranslations);
+
+    /**
      * Fetches all testimonials
      * 
      * @param boolean $published Whether to fetch only published ones
      * @return array
      */
     public function fetchAll($published);
-
-    /**
-     * Fetches a testimonial by its associated id
-     * 
-     * @param string $id
-     * @return array
-     */
-    public function fetchById($id);
-
-    /**
-     * Deletes a testimonial by its associated id
-     * 
-     * @param string $id
-     * @return boolean
-     */
-    public function deleteById($id);
 }
