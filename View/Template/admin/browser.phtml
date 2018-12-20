@@ -1,7 +1,10 @@
-<?php defined('KRYSTAL') or die; ?>
 <?php
 
+use Krystal\Grid\Grid;
 use Krystal\Form\Element;
+use Cms\View\Icon;
+
+defined('KRYSTAL') or die;
 
 ?>
 
@@ -31,49 +34,57 @@ use Krystal\Form\Element;
 
 <form>
 	<div class="table-responsive">
-		<table class="table table-hover table-bordered table-striped">
-			<thead>
-				<tr>
-					<th class="text-center">
-						<?php if (!empty($testimonials)): ?>
-						<input type="checkbox" />
-						<?php endif; ?>
-					</th>
-					<th class="text-center"><?php $this->show('#'); ?></th>
-					<th class="text-center"><?php $this->show('Author'); ?></th>
-					<th class="text-center"><?php $this->show('Testimonial'); ?></th>
-					<th class="text-center"><?php $this->show('Published'); ?></th>
-					<th class="text-center"><?php $this->show('Order'); ?></th>
-					<th class="text-center"><?php $this->show('Actions'); ?></th>
-				</tr>
-			</thead>
-			
-			<?php if (!empty($testimonials)): ?>
-			<tbody>
-				<?php foreach ($testimonials as $testimonial): ?>
-				<tr>
-					<td class="text-center">
-						<input type="checkbox" name="toDelete[<?php echo $testimonial->getId(); ?>]" />
-					</td>
-					<td class="text-center text-muted"><?php echo $testimonial->getId(); ?></td>
-					<td><?php echo $testimonial->getAuthor(); ?></td>
-					<td><?php echo $testimonial->getContent(); ?></td>
-					<td class="text-center">
-                        <?php echo Element::checkbox(sprintf('published[%s]', $testimonial->getId()), $testimonial->getPublished()); ?>
-                    </td>
-					<td class="col-lg-1 text-center">
-                        <?php echo Element::number(sprintf('order[%s]', $testimonial->getId()), $testimonial->getOrder(), array('class' => 'form-control', 'min' => '0')); ?>
-                    </td>
-					<td class="text-center">
-						<a data-toggle="tooltip" data-placement="left" data-original-title="<?php $this->show('Edit this testimonial'); ?>" data-button="edit" href="<?php echo $this->url('Testimonials:Admin:Testimonial@editAction', $testimonial->getId()); ?>"><i class="glyphicon glyphicon-pencil"></i></a>
-						<a data-toggle="tooltip" data-placement="left" data-original-title="<?php $this->show('Remove this testimonial'); ?>" data-button="delete" data-url="<?php echo $this->url('Testimonials:Admin:Testimonial@deleteAction', $testimonial->getId()); ?>" href="#" ><i class="glyphicon glyphicon-remove"></i></a>
-					</td>
-				</tr>
-				<?php endforeach; ?>
-				
-			</tbody>
-			<?php endif; ?>
-		</table>
+        <?= Grid::render($testimonials, array(
+            'batch' => true,
+            'pk' => 'id',
+            'tableClass' => 'table table-hover table-bordered table-striped table-condensed',
+            'columns' => array(
+                array(
+                    'column' => 'id',
+                    'label' => '#'
+                ),
+
+                array(
+                    'column' => 'author',
+                ),
+
+                array(
+                    'column' => 'content',
+                    'label' => 'Testimonial'
+                ),
+
+                array(
+                    'column' => 'published',
+                    'value' => function($testimonial){
+                        return Element::checkbox(sprintf('published[%s]', $testimonial->getId()), $testimonial->getPublished());
+                    }
+                ),
+                
+                array(
+                    'column' => 'order',
+                    'value' => function($testimonial){
+                        return Element::number(sprintf('order[%s]', $testimonial->getId()), $testimonial->getOrder(), array('class' => 'form-control', 'min' => '0'));
+                    }
+                )
+            ),
+
+            'actions' => array(
+                'edit' => function($testimonial){
+                    return Icon::edit(
+                        $this->url('Testimonials:Admin:Testimonial@editAction', $testimonial->getId()),
+                        $this->translate('Edit this testimonial')
+                    );
+                },
+
+                'remove' => function($testimonial){
+                    return Icon::remove(
+                        $this->url('Testimonials:Admin:Testimonial@deleteAction', $testimonial->getId()),
+                        $this->translate('Remove this testimonial')
+                    );
+                }
+            )
+
+        ), $this->translator); ?>        
 		
 		<?php if (empty($testimonials)): ?>
 		<div class="center-block">

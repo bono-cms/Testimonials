@@ -107,8 +107,8 @@ final class Testimonial extends AbstractController
         $service = $this->getModuleService('testimonialManager');
 
         // Batch removal
-        if ($this->request->hasPost('toDelete')) {
-            $ids = array_keys($this->request->getPost('toDelete'));
+        if ($this->request->hasPost('batch')) {
+            $ids = array_keys($this->request->getPost('batch'));
 
             $service->deleteByIds($ids);
             $this->flashBag->set('success', 'Selected elements have been removed successfully');
