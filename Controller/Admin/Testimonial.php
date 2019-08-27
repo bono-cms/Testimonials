@@ -59,7 +59,8 @@ final class Testimonial extends AbstractController
         $testimonial = $this->getModuleService('testimonialManager')->fetchById($id, true);
 
         if ($testimonial !== false) {
-            return $this->createForm($testimonial, 'Edit the testimonial');
+            $name = $this->getCurrentProperty($testimonial, 'author');
+            return $this->createForm($testimonial, $this->translator->translate('Edit the testimonial from "%s"', $name));
         } else {
             return false;
         }
