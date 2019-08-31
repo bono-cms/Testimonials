@@ -106,6 +106,7 @@ final class Testimonial extends AbstractController
     public function deleteAction($id)
     {
         $service = $this->getModuleService('testimonialManager');
+        $historyService = $this->getService('Cms', 'historyManager');
 
         // Batch removal
         if ($this->request->hasPost('batch')) {
@@ -114,14 +115,21 @@ final class Testimonial extends AbstractController
             $service->deleteByIds($ids);
             $this->flashBag->set('success', 'Selected elements have been removed successfully');
 
+            // Save in the history
+            $historyService->write('Testimonials', '%s testimonials have been removed', count($ids));
         } else {
             $this->flashBag->set('warning', 'You should select at least one element to remove');
         }
 
         // Single removal
         if (!empty($id)) {
+            $testimonial = $this->getModuleService('testimonialManager')->fetchById($id, false);
+
+            //A testimonial by %s has been removed
             $service->deleteById($id);
             $this->flashBag->set('success', 'Selected element has been removed successfully');
+            
+            $historyService->write('Testimonials', 'A testimonial by %s has been removed', $testimonial->getAuthor());
         }
 
         return '1';
@@ -148,16 +156,22 @@ final class Testimonial extends AbstractController
 
         if (1) {
             $service = $this->getModuleService('testimonialManager');
+            $historyService = $this->getService('Cms', 'historyManager');
+            $name = $this->getCurrentProperty($this->request->getPost('translation'), 'author');
 
             if (!empty($input['testimonial']['id'])) {
                 if ($service->update($input)) {
                     $this->flashBag->set('success', 'The element has been updated successfully');
+
+                    $historyService->write('Testimonial', 'The testimonial by %s has been updated', $name);
                     return '1';
                 }
 
             } else {
                 if ($service->add($input)) {
                     $this->flashBag->set('success', 'The element has been created successfully');
+
+                    $historyService->write('Testimonial', 'A testimonial by %s has been added', $name);
                     return $service->getLastId();
                 }
             }

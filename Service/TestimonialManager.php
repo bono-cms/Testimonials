@@ -26,35 +26,14 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     private $testimonialMapper;
 
     /**
-     * History manager to keep tracks
-     * 
-     * @var \Cms\Service\HistoryManagerInterface
-     */
-    private $historyManager;
-
-    /**
      * State initialization
      * 
      * @param \Testimonials\Storage\TestimonialMapperInterface $testimonialMapper
-     * @param \Cms\Service\HistoryManagerInterface $historyManager
      * @return void
      */
-    public function __construct(TestimonialMapperInterface $testimonialMapper, HistoryManagerInterface $historyManager)
+    public function __construct(TestimonialMapperInterface $testimonialMapper)
     {
         $this->testimonialMapper = $testimonialMapper;
-        $this->historyManager = $historyManager;
-    }
-
-    /**
-     * Tracks activity
-     * 
-     * @param string $message
-     * @param string $placeholder
-     * @return boolean
-     */
-    private function track($message, $placeholder)
-    {
-        return $this->historyManager->write('Testimonials', $message, $placeholder);
     }
 
     /**
@@ -92,10 +71,7 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
      */
     public function deleteByIds(array $ids)
     {
-        $this->testimonialMapper->deleteEntity($ids);
-
-        $this->track('%s testimonials have been removed', count($ids));
-        return true;
+        return $this->testimonialMapper->deleteEntity($ids);
     }
 
     /**
@@ -106,14 +82,17 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
      */
     public function deleteById($id)
     {
-        //$author = $this->testimonialMapper->fetchAuthorById($id);
+        return $this->testimonialMapper->deleteEntity($id);
+    }
 
-        if ($this->testimonialMapper->deleteEntity($id)) {
-            //$this->track('A testimonial by %s has been removed', $author);
-            return true;
-        } else {
-            return false;
-        }
+    /**
+     * Returns last id
+     * 
+     * @return integer
+     */
+    public function getLastId()
+    {
+        return $this->testimonialMapper->getLastId();
     }
 
     /**
@@ -130,16 +109,6 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
         } else {
             return $this->prepareResult($this->testimonialMapper->fetchById($id, false));
         }
-    }
-
-    /**
-     * Returns last id
-     * 
-     * @return integer
-     */
-    public function getLastId()
-    {
-        return $this->testimonialMapper->getLastId();
     }
 
     /**
@@ -162,8 +131,6 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     public function update(array $input)
     {
         //$input['order'] = (int) $input['order'];
-
-        //$this->track('The testimonial by %s has been updated', $input['author']);
         return $this->testimonialMapper->saveEntity($input['testimonial'], $input['translation']);
     }
 
@@ -176,8 +143,6 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     public function add(array $input)
     {
         //$input['order'] = (int) $input['order'];
-
-        //$this->track('A testimonial by %s has been added', $input['author']);
         return $this->testimonialMapper->saveEntity($input['testimonial'], $input['translation']);
     }
 }
