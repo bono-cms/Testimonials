@@ -11,22 +11,22 @@
 
 namespace Testimonials\Service;
 
-final class SiteService implements SiteServiceInterface
+final class SiteService
 {
     /**
      * The service object
      * 
-     * @var \Testimonials\Service\TestimonialManagerInterface
+     * @var \Testimonials\Service\TestimonialManager
      */
     private $testimonialManager;
 
     /**
      * State initialization
      * 
-     * @param \Testimonials\Service\TestimonialManagerInterface $testimonialManager
+     * @param \Testimonials\Service\TestimonialManager $testimonialManager
      * @return void
      */
-    public function __construct(TestimonialManagerInterface $testimonialManager)
+    public function __construct(TestimonialManager $testimonialManager)
     {
         $this->testimonialManager = $testimonialManager;
     }

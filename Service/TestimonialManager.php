@@ -12,11 +12,10 @@
 namespace Testimonials\Service;
 
 use Cms\Service\AbstractManager;
-use Cms\Service\HistoryManagerInterface;
 use Testimonials\Storage\TestimonialMapperInterface;
 use Krystal\Stdlib\VirtualEntity;
 
-final class TestimonialManager extends AbstractManager implements TestimonialManagerInterface
+final class TestimonialManager extends AbstractManager
 {
     /**
      * Any compliant testimonial mapper
@@ -64,23 +63,24 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     }
 
     /**
-     * Deletes testimonials by their associated ids
+     * Updates a testimonial
      * 
-     * @param array $ids
+     * @param array $input Raw input data
      * @return boolean
      */
-    public function deleteByIds(array $ids)
+    public function save(array $input)
     {
-        return $this->testimonialMapper->deleteEntity($ids);
+        $input['testimonial']['order'] = (int) $input['testimonial']['order'];
+        return $this->testimonialMapper->saveEntity($input['testimonial'], $input['translation']);
     }
 
     /**
      * Deletes a testimonial by its associated id
      * 
-     * @param string $id
+     * @param string|array $id
      * @return boolean
      */
-    public function deleteById($id)
+    public function delete($id)
     {
         return $this->testimonialMapper->deleteEntity($id);
     }
@@ -120,29 +120,5 @@ final class TestimonialManager extends AbstractManager implements TestimonialMan
     public function fetchAll($published)
     {
         return $this->prepareResults($this->testimonialMapper->fetchAll($published));
-    }
-
-    /**
-     * Updates a testimonial
-     * 
-     * @param array $input Raw input data
-     * @return boolean
-     */
-    public function update(array $input)
-    {
-        //$input['order'] = (int) $input['order'];
-        return $this->testimonialMapper->saveEntity($input['testimonial'], $input['translation']);
-    }
-
-    /**
-     * Adds a testimonial
-     * 
-     * @param array $input Raw input data
-     * @return boolean
-     */
-    public function add(array $input)
-    {
-        //$input['order'] = (int) $input['order'];
-        return $this->testimonialMapper->saveEntity($input['testimonial'], $input['translation']);
     }
 }
